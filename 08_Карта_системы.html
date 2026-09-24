@@ -1,0 +1,519 @@
+<title>Карта системы Марии</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#F7F2F5; --surface:#FFFFFF; --surface2:#FBF7FA; --ink:#2B2130; --muted:#6E6275; --line:#E9DEE6;
+  --agency:#8A3D6E; --agency-soft:#F5E4EF;
+  --brand:#C45C7C; --brand-soft:#FBE7ED;
+  --club:#6F5BB0; --club-soft:#ECE8F8;
+  --china:#A37A2E; --china-soft:#F6EEDC;
+  --ok:#3F8566; --ok-soft:#E1F1E8;
+  --part:#B07A18; --part-soft:#FAEFD8;
+  --no:#C0384F; --no-soft:#FBE3E7;
+  --work:#6F5BB0; --work-soft:#ECE8F8;
+  --pause:#857C8A; --pause-soft:#EFECF0;
+  --display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --shadow:0 1px 2px rgba(80,40,70,.06),0 6px 20px rgba(80,40,70,.07);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#1A1420; --surface:#241C2B; --surface2:#2B2233; --ink:#F1E9F0; --muted:#B5A7B8; --line:#3A2F42;
+    --agency:#E08BBE; --agency-soft:#3A2233; --brand:#F092AC; --brand-soft:#3E2230;
+    --club:#B3A4EE; --club-soft:#2E2842; --china:#E0B866; --china-soft:#3A301C;
+    --ok:#77C9A2; --ok-soft:#1E3A2E; --part:#E6B45A; --part-soft:#3A2E17; --no:#F28195; --no-soft:#40202A;
+    --work:#B3A4EE; --work-soft:#2E2842; --pause:#AFA5B3; --pause-soft:#2F2835;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#1A1420; --surface:#241C2B; --surface2:#2B2233; --ink:#F1E9F0; --muted:#B5A7B8; --line:#3A2F42;
+  --agency:#E08BBE; --agency-soft:#3A2233; --brand:#F092AC; --brand-soft:#3E2230;
+  --club:#B3A4EE; --club-soft:#2E2842; --china:#E0B866; --china-soft:#3A301C;
+  --ok:#77C9A2; --ok-soft:#1E3A2E; --part:#E6B45A; --part-soft:#3A2E17; --no:#F28195; --no-soft:#40202A;
+  --work:#B3A4EE; --work-soft:#2E2842; --pause:#AFA5B3; --pause-soft:#2F2835;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;padding-inline:16px;padding-block:22px 56px}
+.wrap{max-width:1240px;margin:0 auto;display:grid;gap:22px}
+header{display:grid;gap:6px;text-align:center;justify-items:center}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(32px,5vw,50px);line-height:1.05;margin:0;text-wrap:balance}
+.lede{color:var(--muted);max-width:62ch;margin:0}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.tab{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 16px;font:inherit;font-weight:600;font-size:14px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tab:focus-visible,.node:focus-visible,.close:focus-visible,.chipf:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:center;font-size:13px;color:var(--muted)}
+.legend span{display:inline-flex;gap:6px;align-items:center}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
+
+/* ---- mind map ---- */
+.map{position:relative;display:grid;grid-template-columns:1fr minmax(220px,260px) 1fr;gap:28px 36px;align-items:start}
+.map svg.links{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.map svg.links path{fill:none;stroke-width:2.5;stroke-linecap:round;opacity:.55}
+.col{display:grid;gap:24px;align-content:start}
+.hub{grid-column:2;grid-row:1;align-self:start;position:sticky;top:calc(env(safe-area-inset-top,0px) + 20px);margin-top:40px;background:var(--surface);border-radius:50% / 42%;box-shadow:var(--shadow);border:1px solid var(--line);padding:30px 22px;text-align:center;display:grid;gap:8px;justify-items:center;aspect-ratio:1/1;align-content:center}
+.hub .big{font-family:var(--display);font-size:25px;font-weight:700;line-height:1.1}
+.hub .sm{font-size:12.5px;color:var(--muted)}
+.hub .star{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--brand)}
+.branch{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+.bhead{padding:14px 16px 12px;display:grid;gap:4px;border-bottom:1px solid var(--line)}
+.bhead .bt{font-family:var(--display);font-size:26px;font-weight:700;line-height:1.1;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.bhead .bt .pause{font-family:var(--body);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:2px 8px;background:var(--pause-soft);color:var(--pause)}
+.bhead .bd{font-size:13px;color:var(--muted)}
+.meter{display:flex;height:6px;border-radius:3px;overflow:hidden;background:var(--line);margin-top:6px}
+.meter i{display:block;height:100%}
+.nodes{display:grid;gap:8px;padding:12px}
+.group{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:6px 4px 0}
+.node{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;text-align:left;background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:9px 12px;font:inherit;color:inherit;cursor:pointer;transition:transform .15s ease,border-color .15s ease}
+.node:hover{transform:translateX(2px);border-color:var(--bc)}
+.node[aria-current="true"]{border-color:var(--bc);box-shadow:0 0 0 2px var(--bcs)}
+.node .nt{font-weight:600;font-size:14px;line-height:1.3}
+.node .na{display:inline-grid;grid-template-columns:repeat(4,8px);gap:2px}
+.node .na i{height:8px;border-radius:2px;background:var(--line)}
+.node .na i.now{background:var(--bc)}
+.node .na i.goal{background:var(--bcs);outline:1px solid var(--bc);outline-offset:-1px}
+.b-agency{--bc:var(--agency);--bcs:var(--agency-soft)} .b-agency .bhead{background:var(--agency-soft)} .b-agency .bt{color:var(--agency)}
+.b-brand{--bc:var(--brand);--bcs:var(--brand-soft)} .b-brand .bhead{background:var(--brand-soft)} .b-brand .bt{color:var(--brand)}
+.b-club{--bc:var(--club);--bcs:var(--club-soft)} .b-club .bhead{background:var(--club-soft)} .b-club .bt{color:var(--club)}
+.b-china{--bc:var(--china);--bcs:var(--china-soft)} .b-china .bhead{background:var(--china-soft)} .b-china .bt{color:var(--china)}
+.b-china{opacity:.92}
+.s-ok{background:var(--ok)} .s-part{background:var(--part)} .s-no{background:var(--no)} .s-work{background:var(--work)} .s-pause{background:var(--pause)}
+
+/* ---- panel ---- */
+.scrim{position:fixed;inset:0;background:rgba(30,15,30,.28)}
+.panel{position:fixed;top:0;right:0;bottom:0;width:min(520px,100%);background:var(--surface);box-shadow:-10px 0 40px rgba(40,10,40,.18);overflow-y:auto;padding:calc(env(safe-area-inset-top,0px) + 20px) 22px calc(env(safe-area-inset-bottom,0px) + 28px);display:grid;gap:16px;align-content:start}
+.ptop{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.pbr{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.ptitle{font-family:var(--display);font-size:32px;font-weight:700;line-height:1.05;margin:2px 0 0}
+.close{border:1px solid var(--line);background:var(--surface2);color:var(--ink);border-radius:999px;width:36px;height:36px;font-size:18px;cursor:pointer;flex:none}
+.badges{display:flex;flex-wrap:wrap;gap:6px}
+.badge{font-size:12px;font-weight:700;border-radius:999px;padding:3px 10px}
+.bx-ok{background:var(--ok-soft);color:var(--ok)} .bx-part{background:var(--part-soft);color:var(--part)} .bx-no{background:var(--no-soft);color:var(--no)} .bx-work{background:var(--work-soft);color:var(--work)} .bx-pause{background:var(--pause-soft);color:var(--pause)}
+.auto{background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:8px}
+.auto .al{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.steps4{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.steps4 div{height:8px;border-radius:4px;background:var(--line)}
+.steps4 div.now{background:var(--brand)} .steps4 div.goal{background:repeating-linear-gradient(45deg,var(--brand-soft),var(--brand-soft) 4px,var(--line) 4px,var(--line) 8px)}
+.auto .ad{font-size:13.5px}
+.blk h4{margin:0 0 6px;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;display:flex;gap:8px;align-items:center}
+.blk ul,.blk ol{margin:0;padding-left:20px;display:grid;gap:4px}
+.blk p{margin:0}
+.h-have{color:var(--ok)} .h-miss{color:var(--no)} .h-who{color:var(--club)} .h-tz{color:var(--agency)} .h-steps{color:var(--brand)}
+.plan{font-size:12.5px;color:var(--muted)}
+
+/* ---- flows ---- */
+.flows{display:grid;gap:14px}
+.flow{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px;box-shadow:var(--shadow);display:grid;gap:10px}
+.flow .fh{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline}
+.flow .ft{font-family:var(--display);font-size:24px;font-weight:700;line-height:1.1}
+.flow .fn{font-size:13px;color:var(--muted);max-width:70ch}
+.chain{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.link{display:inline-flex;align-items:center;gap:6px}
+.actor{border-radius:10px;padding:6px 10px;font-size:13.5px;font-weight:600;border:1.5px solid var(--line);background:var(--surface2)}
+.actor.ok{border-color:var(--ok)} .actor.no{border-color:var(--no);border-style:dashed} .actor.part{border-color:var(--part)}
+.actor small{display:block;font-weight:500;font-size:11.5px;color:var(--muted)}
+.arrow{font-size:12px;color:var(--muted);display:inline-flex;flex-direction:column;align-items:center;line-height:1.1;min-width:40px;text-align:center}
+.arrow b{font-size:16px;color:var(--brand)}
+.arrow.broken b{color:var(--no)}
+
+/* ---- questions ---- */
+.qs{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.q{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--no);border-radius:14px;padding:14px 16px;display:grid;gap:6px;box-shadow:var(--shadow)}
+.q .qt{font-weight:700}
+.q .qv{font-size:13.5px;color:var(--muted)}
+.filters{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.chipf{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:5px 12px;font:inherit;font-size:13px;cursor:pointer}
+.chipf[aria-pressed="true"]{border-color:var(--brand);background:var(--brand-soft);color:var(--brand);font-weight:700}
+.dim{opacity:.28}
+
+@media (max-width:900px){
+  .map{grid-template-columns:1fr;gap:18px}
+  .hub{grid-column:1;grid-row:auto;position:static;aspect-ratio:auto;border-radius:22px}
+  .map svg.links{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Архитектура бизнеса · Мария Боголюбова</div>
+    <h1>Карта системы</h1>
+    <p class="lede">Четыре направления и всё, что нужно каждому: что уже есть, чего не хватает, какой агент делает, какое ТЗ писать и как довести до автопилота. Нажмите на любой пункт.</p>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" id="t-map" aria-selected="true" aria-controls="v-map">Карта</button>
+    <button class="tab" role="tab" id="t-flow" aria-selected="false" aria-controls="v-flow">Как агенты передают работу</button>
+    <button class="tab" role="tab" id="t-q" aria-selected="false" aria-controls="v-q">Развилки на решение</button>
+  </div>
+
+  <section id="v-map" role="tabpanel" aria-labelledby="t-map" style="display:grid;gap:16px">
+    <div class="legend">
+      <span><i class="dot s-ok"></i>есть и работает</span>
+      <span><i class="dot s-part"></i>есть частично</span>
+      <span><i class="dot s-work"></i>в работе</span>
+      <span><i class="dot s-no"></i>нет, нужно создать</span>
+      <span><i class="dot s-pause"></i>на паузе</span>
+      <span>▮▮▯▯ полоски справа — автоматизация: закрашено сейчас, светлое — цель</span>
+    </div>
+    <div class="filters" id="filters" role="group" aria-label="Показать"></div>
+    <div class="map" id="map">
+      <svg class="links" id="links" aria-hidden="true"></svg>
+      <div class="col" id="col-left"></div>
+      <div class="hub" id="hub">
+        <div class="star">Девиз</div>
+        <div class="big">Максимально автоматизировать бизнес</div>
+        <div class="sm">Первая цель: первая сделка (комиссия ≈ 1 млн ₽ по брифу)</div>
+        <div class="sm" id="hubstats"></div>
+      </div>
+      <div class="col" id="col-right"></div>
+    </div>
+  </section>
+
+  <section id="v-flow" role="tabpanel" aria-labelledby="t-flow" hidden style="gap:16px">
+    <div class="legend">
+      <span><i class="dot s-ok"></i>исполнитель есть</span>
+      <span><i class="dot s-part"></i>есть, но хромает</span>
+      <span><i class="dot s-no"></i>исполнителя нет, создать</span>
+      <span><b style="color:var(--brand)">→</b> передача файлом</span>
+      <span><b style="color:var(--no)">⇢</b> сейчас передача через чат, теряется</span>
+    </div>
+    <div class="flows" id="flows"></div>
+  </section>
+
+  <section id="v-q" role="tabpanel" aria-labelledby="t-q" hidden style="gap:14px">
+    <p class="lede" style="text-align:center;margin:0 auto">Пока эти вопросы открыты, агенты работают с разными вводными. Решаются по одному.</p>
+    <div class="qs" id="qs"></div>
+  </section>
+</div>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="panel" id="panel" hidden role="dialog" aria-modal="true" aria-labelledby="ptitle"></aside>
+
+<script>
+const B = {
+  agency:{name:"Агентство",note:"Сделки, Авито, реклама, агенты и автоматизация. Название: Мегаполис / Градов — не решено",cls:"b-agency",side:"right"},
+  brand:{name:"Личный бренд «Мария Боголюбова»",note:"Голос культурной и интеллектуальной Москвы. Медиа ведёт в агентство",cls:"b-brand",side:"left"},
+  club:{name:"Клуб о Москве",note:"Пара к личному бренду, идёт параллельно. Высокий порог входа, меценаты",cls:"b-club",side:"left"},
+  china:{name:"Китай и поездки",note:"Отдельное направление, дальний угол. Сейчас на паузе",cls:"b-china",side:"right",pause:true}
+};
+const SL = {ok:"есть",part:"частично",no:"нет",work:"в работе",pause:"пауза"};
+const AUTO = ["вручную","агент по запросу","агент + ваша проверка","автопилот"];
+
+const N = [
+/* ================= АГЕНТСТВО ================= */
+{b:"agency",g:"Бренд и упаковка",t:"Название агентства",s:"no",
+ have:["Брендбук и айдентика у Маркетолога (17_brand_book, 05_brand_identity)","Черновое видение «Градов» с ретро-стилем (у Маркетолога, 21.09)"],
+ miss:["Утверждённого названия нет: Маркетолог записал ребрендинг Мегаполис → Градов, а в брифе от 24.09 сказано, что заняты оба","Проверки по реестру товарных знаков ФИПС и доменам"],
+ who:["Маркетолог — варианты","Perplexity + Юрист — проверка занятости","Вы — выбор"],create:[],
+ tz:["Критерии названия (смысл, звучание, свободный домен и знак)"],
+ steps:["Критерии названия","20–30 вариантов","Проверка ФИПС, доменов, соцсетей","Шорт-лист 3–5","Ваш выбор","Замена названия во всех агентах"],
+ auto:[0,1],plan:"2A.1–2A.9"},
+{b:"agency",g:"Бренд и упаковка",t:"Дизайн и визуал",s:"no",
+ have:["Gemini для картинок (оплачен)","Брендбук у Маркетолога — основа стиля"],
+ miss:["Нет ни агента, ни навыка-дизайнера: баннеры, КП, обложки, одностраничник сейчас некому оформлять","Цвета и визуал в брендбуке для агентства не описаны (отмечено у Маркетолога)"],
+ who:["Навык «Дизайн» — создать","Gemini — фото и рендеры"],create:["Навык «Дизайн» у Маркетолога: шаблоны баннеров, слайдов КП, обложек по брендбуку"],
+ tz:["ТЗ на навык «Дизайн»: форматы (баннер Авито, слайд КП, обложка поста), правила бренда, откуда брать картинки"],
+ steps:["Дописать визуальный раздел брендбука (цвета, шрифты, ретро или нет)","ТЗ на навык","Инженер собирает навык","Приёмка: 3 баннера и 1 КП"],
+ auto:[0,2],plan:"2A.8, Е23–Е25"},
+{b:"agency",g:"Бренд и упаковка",t:"Одностраничник с квизом",s:"work",
+ have:["Структура квиза и лид-магнит в 3 слоя (решено 24.09)","Калькулятор платежа у Авитолога (calculate_payment.py)","Юридические требования от Юриста"],
+ miss:["Самой страницы","Решения, где делать: конструктор или страница от Архитектора","Связки заявка → таблица «Лиды» → Telegram"],
+ who:["Архитектор — сборка","Маркетолог — тексты","Юрист — политика ПДн и согласие","Авитолог — расчёты"],create:["Навык «Лендинг» — после первого удачного запуска"],
+ tz:["Файл кампании (единый для всех агентов)","Сценарий квиза","Три PDF-лидмагнита"],
+ steps:["Решение: где делаем","Тексты экранов и квиза","Калькулятор","3 PDF","Документы Юриста","Сборка","3 тестовые заявки"],
+ auto:[0,2],plan:"Е12–Е30"},
+{b:"agency",g:"Привлечение клиентов",t:"Реклама в Авито Рекламе",s:"work",
+ have:["Бриф кампании у Авитолога","Юрпроверка v1 и v2 у Юриста","Данные Вордстата","Расчётный счёт ИП"],
+ miss:["Кабинет не заведён","Лендинг и баннеры","Порог бюджета не решён"],
+ who:["Авитолог — бриф, бюджет, разбор статистики","Юрист","Маркетолог — тексты","Вы — кабинет и «да»"],create:["Навык «Кампания Авито Рекламы» — после теста"],
+ tz:["Файл кампании (Архитектор)"],
+ steps:["Порог бюджета","Файл кампании","Бриф v2","Баннеры","Лендинг","Кабинет и данные для ОРД","Бюджет и стоп-критерий","Запуск по вашему «да»","Разбор на 7-й и 14-й день"],
+ auto:[0,2],plan:"Е1–Е39"},
+{b:"agency",g:"Привлечение клиентов",t:"Объявления на Авито",s:"part",
+ have:["Авитолог: упаковка, проверка группы застройщика и юрблока, фид, API","Реестр застройщиков у Юриста","2 карточки по «Алие» собраны"],
+ miss:["Тексты «грустные» — две недели нет карточки","Не решён статус «уполномоченный / официальный партнёр TrendAgent»","Опубликовано 0"],
+ who:["Авитолог","Юрист"],create:[],
+ tz:["ТЗ Инженеру на починку копирайтинга карточки"],
+ steps:["Решить статус партнёрства","Разобрать 2 текста, найти причину","Починить навык","Быстрые выплаты из TrendAgent","2 карточки → Юрист файлом","Публикация по «да»"],
+ auto:[1,2],plan:"0D.9, 0F.1–0F.8"},
+{b:"agency",g:"Привлечение клиентов",t:"Яндекс Директ",s:"no",
+ have:["Вордстат-выгрузка 24.09","Тот же лендинг подойдёт"],
+ miss:["Исполнителя: расширять Авитолога до «Рынок и трафик» или отдельный Директолог"],
+ who:["Решение за вами"],create:["Навык «Директ» у агента трафика"],
+ tz:["Семантика и минус-слова","Структура кампаний"],
+ steps:["Решение об исполнителе","Семантика","Минус-слова","Тексты + Юрист","Метрика и цели","Бюджет","Запуск","Сравнение с Авито"],
+ auto:[0,2],plan:"Д1–Д16"},
+{b:"agency",g:"Привлечение клиентов",t:"Холодные точки: Яндекс Бизнес, 2ГИС",s:"no",
+ have:["Тексты можно взять из брендбука и ToV"],miss:["Карточек нет","Рабочего номера нет"],
+ who:["Perplexity — список площадок","Маркетолог — тексты","Вы — создание"],create:[],tz:["—"],
+ steps:["Список площадок","Тексты","Создать карточки"],auto:[0,1],plan:"0G.1–0G.3"},
+{b:"agency",g:"Привлечение клиентов",t:"Поток «собственники»",s:"no",
+ have:["Авитолог умеет собирать объявления","Идея: аналитика по ЖК в обмен на разговор"],
+ miss:["Юрпроверки, можно ли писать собственникам из объявлений","Текста предложения"],
+ who:["Авитолог — сбор","Юрист","Маркетолог — текст"],create:[],tz:["Предложение собственнику"],
+ steps:["Ваше решение запускать","Юрпроверка","Текст","Первые 10 обращений"],auto:[0,2],plan:"2C.1–2C.5"},
+{b:"agency",g:"Продажи",t:"Приём заявок и CRM",s:"no",
+ have:["Спецификация быстрого ответа у Маркетолога (11_messaging_matrix_и_fast_response_spec)","Конверсионный плейбук"],
+ miss:["Рабочего номера и Telegram","Таблицы «Лиды»","Правила скорости ответа"],
+ who:["Вы — номер, скорость ответа","Архитектор — таблица и уведомления","Маркетолог — сценарий"],create:["Лид-менеджер — позже, когда пойдут заявки"],
+ tz:["Сценарий первого разговора"],
+ steps:["Номер и Telegram","Таблица «Лиды»","Заявка → таблица + уведомление","Скорость ответа","Сценарий","3 тестовые заявки"],
+ auto:[0,2],plan:"0C.1–0C.7"},
+{b:"agency",g:"Продажи",t:"КП и презентация клиенту",s:"no",
+ have:["Ваша сегодняшняя презентация — образец","Авитолог: аналитика рынка и расчёт платежей","Брендбук"],
+ miss:["Сборщика КП нет — 24.09 вы собирали полдня вручную"],
+ who:["Навык «КП» — создать"],create:["Навык «КП»: запрос клиента + объекты → готовая презентация за 15 минут"],
+ tz:["ТЗ на навык «КП»: блоки, источники данных, формат (PDF или слайды)"],
+ steps:["Положить образец в Drive","Разобрать, что сколько времени заняло","Выбрать агента-носителя","ТЗ","Инженер собирает","Пересобрать ваше КП навыком и сравнить"],
+ auto:[0,2],plan:"0H.1–0H.6"},
+{b:"agency",g:"Продажи",t:"Рассылки и продающие тексты",s:"part",
+ have:["ToV, конверсионный плейбук, матрица сообщений у Маркетолога","Навыки humanizer и lead-magnets"],
+ miss:["Базы для рассылки нет (клиентской базы нет по брифу)","Исполнителя регулярных текстов","Юрпроверки согласий на рассылку"],
+ who:["Маркетолог — смыслы","Агент «Контент» — тексты","Юрист — согласия"],create:[],tz:["Календарь рассылок"],
+ steps:["Согласие на рассылку в форме лендинга","Первые 3 письма / сообщения","Проверка Юриста","Автоотправка после квиза"],auto:[0,2],plan:"Е21, Е22"},
+{b:"agency",g:"Продажи",t:"Сделка до выплаты комиссии",s:"part",
+ have:["Юрист: сборка документов, OCR, правовой поиск","Реестр застройщиков","Договоры с TrendAgent и Flat"],
+ miss:["Чек-листа от брони до выплаты","Юриста-партнёра для проверки сделки","Таблицы «быстрые выплаты»"],
+ who:["Вы","Юрист","Навык «Ассистент сделки» — создать"],create:["Навык «Ассистент сделки»"],tz:["Чек-лист сделки"],
+ steps:["Быстрые выплаты TrendAgent","Условия Flat","Найти юриста-партнёра","Чек-лист","Навык"],auto:[0,2],plan:"0F.1–0F.2, 2D.1–2D.11"},
+{b:"agency",g:"Продажи",t:"Аналитика рынка",s:"ok",
+ have:["Авитолог: срез рынка Авито, ЦИАН, TrendAgent, скрипт отсева дублей","Perplexity для открытых отчётов","Исследователь (RESERCH)"],
+ miss:["Лимита расходов на Apify в инструкции (история с 450 карточками)","Отчёта как продукта для клиентов и собственников"],
+ who:["Авитолог","Perplexity"],create:["Навык «Отчёт по рынку» раз в месяц"],tz:["Структура отчёта"],
+ steps:["Прописать лимит Apify","Первый отчёт","Упаковать в ежемесячный навык"],auto:[1,3],plan:"2B.3"},
+{b:"agency",g:"Агенты и автоматизация",t:"Связи между агентами",s:"no",
+ have:["10 агентов на общем «доме» (FOUNDATION)","Библиотека из 59 навыков (SKILL-SYSTEM)"],
+ miss:["Работа передаётся через чат и теряется («У Юриста» висит без следа)","Журнала решений","Единых источников правды: три порога бюджета, два названия"],
+ who:["Архитектор — правила","Инженер — внедрение"],create:["Файлы задач inbox/outbox у каждого агента","Журнал решений"],
+ tz:["Правила П1–П7 из мастер-плана"],
+ steps:["Журнал решений","Правило «файл задачи»","Один держатель на тему","Проверить на треке Авито"],auto:[0,2],plan:"0B.1–0B.6"},
+{b:"agency",g:"Агенты и автоматизация",t:"Починка агентов",s:"part",
+ have:["Аудит Авитолога сделан 24.09"],
+ miss:["Лишние стопы, агенты больше ограничены, чем работают","Аудита Маркетолога, Продюсера, Главного ассистента"],
+ who:["Архитектор — диагноз и ТЗ","Инженер — правка"],create:[],tz:["ТЗ Инженеру: убрать стопы не про деньги, публикацию и юр. риск","ТЗ на сокращение CLAUDE.md"],
+ steps:["Роль и имя Авитолога","ТЗ на стопы","Сокращение инструкций","Приёмка тем же тестом","Аудит остальных"],auto:[0,1],plan:"0D.3–0D.12"},
+{b:"agency",g:"Агенты и автоматизация",t:"Дубли ролей",s:"no",
+ have:["Продюсер раскладывает бизнес на направления","Главный ассистент — «начальник штаба» жизни","AI_OS ведёт карту способностей","Архитектор (этот чат)"],
+ miss:["Четыре агента делают похожее — неясно, кто главный по стратегии"],
+ who:["Вы — решение","Архитектор — предложение"],create:[],tz:["Сравнение ролей: оставить, объединить, отключить"],
+ steps:["Изучить Продюсера и Главного ассистента","Предложение по объединению","Ваше решение"],auto:[0,0],plan:"0D.11"},
+{b:"agency",g:"Агенты и автоматизация",t:"Инженер и «дом» агентов",s:"part",
+ have:["FOUNDATION — общий дом","Инженер — хранитель библиотеки навыков"],
+ miss:["Правила «дома», из-за которых агенты переусложнены"],
+ who:["Архитектор — диагноз","Инженер"],create:[],tz:["ТЗ на ревизию FOUNDATION"],
+ steps:["Разбор ENGINEER, FOUNDATION, SKILL-SYSTEM","Список правил под удаление","Новая версия дома","Перенос в агентов"],auto:[0,1],plan:"0D.12, 3A.4"},
+{b:"agency",g:"Агенты и автоматизация",t:"Безопасность",s:"no",
+ have:["Ключи в .env исключены из git"],
+ miss:["Все репозитории агентов публичные","Файл .mcp.json не проверен на ключи"],
+ who:["Вы"],create:[],tz:["—"],
+ steps:["Сделать репозитории приватными","Проверить .mcp.json","Перевыпустить ключ, если был открыт"],auto:[0,0],plan:"0A.1–0A.4"},
+{b:"agency",g:"Команда",t:"Первый найм",s:"pause",
+ have:["План в мастер-плане"],miss:["Стартует после первой сделки"],
+ who:["Вы","Архитектор — профиль роли и онбординг"],create:[],tz:["Профиль роли","Вакансия и тестовое"],
+ steps:["Профиль роли","Бюджет","Вакансия","Собеседования","Онбординг по реестру процессов"],auto:[0,1],plan:"3B.1–3B.9"},
+
+/* ================= ЛИЧНЫЙ БРЕНД ================= */
+{b:"brand",g:"Основа",t:"Фреймворк 7 ядер",s:"ok",
+ have:["Фреймворк контент-стратегии — рабочий (7 ядер по дням недели)","ToV, брендбук, навык personal-brand у Маркетолога"],
+ miss:["Обновить годы","Архетипы фреймворка (3) и ToV (2) не сходятся — вопрос отложен у Маркетолога"],
+ who:["Маркетолог"],create:[],tz:["—"],
+ steps:["Обновить годы","Свести архетипы"],auto:[1,1],plan:"1A.2–1A.3"},
+{b:"brand",g:"Основа",t:"Переход в агентство",s:"no",
+ have:["Идея связки: в конце текста — приглашение и ссылка на агентство (у Маркетолога)"],
+ miss:["Продающего ядра во фрейме нет","CTA под каждую площадку","Лид-магнита личного бренда"],
+ who:["Маркетолог"],create:[],tz:["Путь читателя: от поста до заявки"],
+ steps:["Путь читателя","Продающее ядро","CTA по площадкам","Лид-магнит (взять из Авито-трека)"],auto:[0,2],plan:"1B.1–1B.5"},
+{b:"brand",g:"Производство",t:"Агент «Контент»",s:"no",
+ have:["Метод против выдумок: Perplexity собирает массив → агент пишет только по нему","Когда-то работал продюсер контента (с него начинался «дом»)"],
+ miss:["Агента, который пишет тексты под площадки"],
+ who:["Инженер — сборка"],create:["Один агент «Контент» с навыками под каждую площадку (не 7 агентов)"],
+ tz:["ТЗ на агента «Контент»: роль, навыки площадок, метод P-массива, стоп только на публикацию","Паспорт площадок"],
+ steps:["Решение «один агент»","Паспорт площадок","ТЗ","Сборка","Прогон одной темы по всему конвейеру"],auto:[0,2],plan:"1A.1–1A.7"},
+{b:"brand",g:"Производство",t:"Конвейер одной темы",s:"no",
+ have:["Perplexity, NotebookLM, Gemini оплачены"],
+ miss:["Контент-плана на 4 недели","Регулярного запуска"],
+ who:["Маркетолог — план","Perplexity — массив","Агент «Контент» — тексты","Gemini — визуал","Вы — вычитка"],create:[],tz:["Промпт для Perplexity"],
+ steps:["Контент-план","Массив по теме","Мастер-текст","Адаптации под площадки","Визуал","Вычитка","Публикация"],auto:[0,2],plan:"1C.1–1C.9"},
+{b:"brand",g:"Площадки",t:"Telegram + Max",s:"no",have:["Паспорт площадок будет у Маркетолога"],miss:["Канала нет"],who:["Вы — создание","Маркетолог — оформление"],create:[],tz:["Описание, закреп"],steps:["Создать канал","Оформить","3 первых поста","Дубль в Max"],auto:[0,2],plan:"1D.1–1D.2"},
+{b:"brand",g:"Площадки",t:"ВКонтакте",s:"no",have:[],miss:["Сообщества нет"],who:["Вы","Маркетолог"],create:[],tz:["Оформление"],steps:["Создать","Оформить","Посты и статьи"],auto:[0,2],plan:"1D.3"},
+{b:"brand",g:"Площадки",t:"Дзен + Telegraph",s:"no",have:[],miss:["Канала нет"],who:["Вы","Агент «Контент»"],create:[],tz:["—"],steps:["Создать канал","Статьи","Дубль в Telegraph"],auto:[0,2],plan:"1D.4–1D.5"},
+{b:"brand",g:"Площадки",t:"vc.ru и Пикабу",s:"no",have:[],miss:["Профилей нет","Адаптации под правила сообществ"],who:["Вы","Агент «Контент»"],create:[],tz:["—"],steps:["Профили","Адаптированные статьи"],auto:[0,2],plan:"1D.6–1D.7"},
+{b:"brand",g:"Площадки",t:"Instagram и YouTube",s:"pause",have:[],miss:["Вердикта Юриста по Instagram (Meta признана экстремистской в РФ)"],who:["Юрист"],create:[],tz:["Запрос Юристу"],steps:["Вердикт Юриста","Решение"],auto:[0,0],plan:"1D.9"},
+{b:"brand",g:"Видео",t:"Видео без лица",s:"no",
+ have:["Решение: голос за кадром + кадры Москвы + ИИ-визуал"],miss:["Сервиса монтажа","Сценариев"],
+ who:["Агент «Контент» — сценарий","Вы — начитка","Gemini — кадры"],create:[],tz:["Критерии сервиса монтажа"],
+ steps:["Выбрать сервис","Сценарий","Начитка","Кадры","Монтаж","Публикация"],auto:[0,2],plan:"1E.1–1E.6"},
+{b:"brand",g:"Видео",t:"Выход в кадр",s:"pause",have:[],miss:["Стартует после первых роликов"],who:["Маркетолог — план","Вы — съёмка"],create:[],tz:["План на 8 недель"],steps:["Руки","Силуэт","Лицо","Съёмочный день раз в неделю"],auto:[0,1],plan:"1E.7–1E.8"},
+
+/* ================= КЛУБ ================= */
+{b:"club",g:"Замысел",t:"Концепция клуба",s:"no",
+ have:["Идея в брифе: история Москвы, высокий порог, меценаты"],miss:["Конспекта ваших идей","Разведки похожих клубов"],
+ who:["Архитектор — вопросы","Perplexity — аналоги","Маркетолог — концепция"],create:[],tz:["Вопросы для интервью"],
+ steps:["Интервью с вами","Разведка аналогов","Концепция: для кого, формат, частота, порог"],auto:[0,1],plan:"4.1–4.3"},
+{b:"club",g:"Замысел",t:"Связь с личным брендом и агентством",s:"no",
+ have:[],miss:["Схемы: как участник клуба становится клиентом (без навязчивых продаж)"],
+ who:["Маркетолог"],create:[],tz:["—"],steps:["Схема связи"],auto:[0,1],plan:"4.4"},
+{b:"club",g:"Деньги и право",t:"Модель денег",s:"no",have:[],miss:["Взнос, партнёры, события"],who:["Маркетолог + Perplexity","Юрист — форма приёма денег"],create:[],tz:["—"],steps:["Модель","Юрформа","Ваше решение"],auto:[0,1],plan:"4.5–4.7"},
+{b:"club",g:"Запуск",t:"Пилотное событие",s:"no",have:[],miss:["Темы, места, спикера, гостей"],who:["Вы","Маркетолог — план"],create:[],tz:["План события"],steps:["План","Приглашения лично","Проведение","Разбор"],auto:[0,1],plan:"4.8–4.11"},
+
+/* ================= КИТАЙ ================= */
+{b:"china",g:"Разведка",t:"Клуб Российско-Китайской ассоциации",s:"pause",have:["Вы посещаете клуб"],miss:["Конспекта: кто там, какие запросы"],who:["Архитектор — вопросы","Вы"],create:[],tz:["—"],steps:["Интервью с вами","5 личных разговоров"],auto:[0,0],plan:"5.1, 5.5"},
+{b:"china",g:"Разведка",t:"Спрос китайских покупателей",s:"pause",have:[],miss:["Справки с источниками","Юрпроверки ограничений для иностранцев"],who:["Perplexity → NotebookLM","Юрист"],create:[],tz:["—"],steps:["Справка","Юрпроверка"],auto:[0,1],plan:"5.2–5.3"},
+{b:"china",g:"Продукт",t:"Одностраничник на китайском",s:"pause",have:[],miss:["Названия агентства","Переводчика"],who:["Маркетолог"],create:[],tz:["—"],steps:["Текст","Перевод","Вёрстка"],auto:[0,1],plan:"5.4"},
+{b:"china",g:"Продукт",t:"Туры в Россию и в Китай",s:"pause",have:[],miss:["Модели и партнёров","Юрпроверки туроператорской деятельности"],who:["Perplexity + Маркетолог","Юрист"],create:[],tz:["—"],steps:["Модели","Юрпроверка","Решение"],auto:[0,1],plan:"5.6–5.10"}
+];
+
+const FLOWS = [
+ {t:"Реклама в Авито Рекламе",n:"Сегодняшний трек. Решения по нему разошлись между чатами: Авитолог писал план по устаревшим решениям.",
+  c:[["Вы","решение по порогу","ok"],["Архитектор","файл кампании","ok"],["Маркетолог","тексты баннеров и квиза","ok"],["Авитолог","бриф и бюджет","part"],["Юрист","вердикт","ok"],["Навык «Дизайн»","баннеры","no"],["Архитектор","лендинг","ok"],["Вы","запуск по «да»","ok"]],broken:[3,4]},
+ {t:"КП клиенту",n:"Сегодня вы делали это полдня вручную. Цель — 15 минут.",
+  c:[["Вы","запрос клиента","ok"],["Авитолог","подборка и расчёты","part"],["Навык «КП»","презентация","no"],["Навык «Дизайн»","оформление","no"],["Вы","проверка и отправка","ok"]],broken:[1,2]},
+ {t:"Карточка на Авито",n:"Застряла на «У Юриста»: карточки не доходили до Юриста файлом.",
+  c:[["Авитолог","текст карточки","part"],["Юрист","проверка","ok"],["Вы","«да» на публикацию","ok"],["Авитолог","публикация через API","ok"]],broken:[1]},
+ {t:"Пост личного бренда",n:"Конвейера ещё нет, собирается с нуля.",
+  c:[["Маркетолог","тема по фрейму","ok"],["Perplexity","массив фактов","ok"],["Агент «Контент»","тексты под площадки","no"],["Gemini","визуал","ok"],["Вы","вычитка","ok"],["Вы → потом сотрудник","публикация","ok"]],broken:[]},
+ {t:"Заявка → сделка",n:"Точки приёма лида ещё нет — по брифу реклама включается только после неё.",
+  c:[["Лендинг","заявка","no"],["Таблица «Лиды» + Telegram","уведомление","no"],["Вы","первый ответ по сценарию","ok"],["Навык «КП»","предложение","no"],["Вы","встреча и сделка","ok"],["Навык «Ассистент сделки»","чек-лист до комиссии","no"]],broken:[]},
+ {t:"Создание нового агента или навыка",n:"Главная причина переусложнения: Инженер строит без жёсткого ТЗ и приёмки.",
+  c:[["Вы","что нужно","ok"],["Архитектор","ТЗ и критерии приёмки","ok"],["Инженер","сборка на «доме» и навыках","part"],["Архитектор","приёмка живым тестом","ok"],["Вы","утверждение","ok"]],broken:[]}
+];
+
+const QS = [
+ {t:"Название агентства",v:"Маркетолог записал ребрендинг «Мегаполис → Градов» (21.09). В брифе от 24.09: «Мегаполис» и «Градов» заняты."},
+ {t:"Порог бюджета клиента",v:"У Маркетолога 20–25 млн ₽, у Авитолога от 30 млн ₽, 24.09 вы назвали «однушка от 22 млн ₽». Нужна одна цифра для всех агентов."},
+ {t:"Кто главный по стратегии",v:"Продюсер, Главный ассистент, AI_OS и Архитектор пересекаются по роли. Оставить, объединить или отключить."},
+ {t:"Где центр системы",v:"В брифе — Google Drive. На деле агенты живут в GitHub и на вашем компьютере. От этого зависит, где лежат файлы задач и журнал решений."},
+ {t:"Квиз и Директ против брифа",v:"В брифе цель — поток клиентов «не квизы и не Директ». Сейчас строим квиз. Предложение: временный инструмент Фазы 0."},
+ {t:"Статус партнёра TrendAgent",v:"«Уполномоченный» или «официальный» — открыт с 17.09, блокирует юрблок карточек."},
+ {t:"Роль Авитолога",v:"Расширить до агента «Рынок и трафик» (Авито, ЦИАН, TrendAgent, Директ) или делать отдельного Директолога."},
+ {t:"Архетипы бренда",v:"Во фреймворке контента 3 архетипа, в ToV и брендбуке 2. Отложено у Маркетолога."}
+];
+
+/* ---------- render ---------- */
+const $ = id => document.getElementById(id);
+function el(tag, attrs, ...kids){ const e=document.createElement(tag); for(const k in (attrs||{})){ if(k==="class") e.className=attrs[k]; else if(k==="text") e.textContent=attrs[k]; else e.setAttribute(k,attrs[k]); } for(const c of kids) if(c!=null) e.append(c); return e; }
+let filter = "all", current = null;
+
+function meter(list){
+  const m = el("div",{class:"meter"}); const tot=list.length||1;
+  for (const s of ["ok","work","part","no","pause"]){ const n=list.filter(x=>x.s===s).length; if(!n) continue; const i=el("i",{class:"s-"+s}); i.style.width=(n/tot*100)+"%"; m.append(i); }
+  return m;
+}
+
+function miniAuto(n){
+  const w=el("span",{class:"na",title:"Автоматизация: сейчас «"+AUTO[n.auto[0]]+"», цель «"+AUTO[n.auto[1]]+"»","aria-label":"Автоматизация: сейчас "+AUTO[n.auto[0]]+", цель "+AUTO[n.auto[1]]});
+  for(let i=0;i<4;i++) w.append(el("i",{class: i<=n.auto[0]?"now":(i<=n.auto[1]?"goal":"")}));
+  return w;
+}
+function renderMap(){
+  $("col-left").textContent=""; $("col-right").textContent="";
+  for (const key of ["brand","club","agency","china"]){
+    const b=B[key], list=N.filter(n=>n.b===key);
+    const head = el("div",{class:"bhead"},
+      el("div",{class:"bt"}, document.createTextNode(b.name), b.pause? el("span",{class:"pause",text:"пауза"}):null),
+      el("div",{class:"bd",text:b.note}), meter(list));
+    const nodes = el("div",{class:"nodes"});
+    let g=null;
+    list.forEach(n=>{
+      if (n.g!==g){ g=n.g; nodes.append(el("div",{class:"group",text:g})); }
+      const btn = el("button",{class:"node",type:"button","data-i":String(N.indexOf(n))},
+        el("i",{class:"dot s-"+n.s,title:SL[n.s]}),
+        el("span",{class:"nt",text:n.t}),
+        miniAuto(n));
+      if (current===n) btn.setAttribute("aria-current","true");
+      if (filter!=="all" && n.s!==filter) btn.classList.add("dim");
+      btn.addEventListener("click",()=>openPanel(n,btn));
+      nodes.append(btn);
+    });
+    const br = el("section",{class:"branch "+b.cls,"data-b":key,"aria-label":b.name}, head, nodes);
+    (b.side==="left"?$("col-left"):$("col-right")).append(br);
+  }
+  const all=N.length, ok=N.filter(n=>n.s==="ok").length, no=N.filter(n=>n.s==="no").length;
+  $("hubstats").textContent = `${all} функций · есть ${ok} · создать ${no}`;
+  requestAnimationFrame(drawLinks);
+}
+
+function drawLinks(){
+  const svg=$("links"), map=$("map"); svg.textContent="";
+  if (getComputedStyle(svg).display==="none") return;
+  const mr=map.getBoundingClientRect(), hr=$("hub").getBoundingClientRect();
+  const hx=hr.left+hr.width/2-mr.left, hy=hr.top+hr.height/2-mr.top;
+  document.querySelectorAll(".branch").forEach(br=>{
+    const r=br.querySelector(".bhead").getBoundingClientRect();
+    const left = B[br.dataset.b].side==="left";
+    const x = (left? r.right : r.left) - mr.left, y = r.top + r.height/2 - mr.top;
+    const sx = left? hr.left-mr.left+6 : hr.right-mr.left-6;
+    const cx = (sx+x)/2;
+    const p=document.createElementNS("http://www.w3.org/2000/svg","path");
+    p.setAttribute("d",`M${sx},${hy} C${cx},${hy} ${cx},${y} ${x},${y}`);
+    p.setAttribute("stroke",getComputedStyle(br).getPropertyValue("--bc").trim()||"#999");
+    svg.append(p);
+  });
+}
+
+function list(items){ const u=el("ul",{}); items.forEach(x=>u.append(el("li",{text:x}))); return u; }
+function openPanel(n, btn){
+  current=n; const b=B[n.b]; const p=$("panel"); p.textContent="";
+  const close=el("button",{class:"close",type:"button","aria-label":"Закрыть",text:"×"});
+  close.addEventListener("click",closePanel);
+  const brc=getComputedStyle(document.querySelector(".branch[data-b='"+n.b+"']")).getPropertyValue("--bc");
+  const eb=el("div",{class:"pbr",text:b.name+" · "+n.g}); eb.style.color=brc;
+  p.append(el("div",{class:"ptop"}, el("div",{}, eb, el("h2",{class:"ptitle",id:"ptitle",text:n.t})), close));
+  p.append(el("div",{class:"badges"}, el("span",{class:"badge bx-"+n.s,text:"Статус: "+SL[n.s]}), el("span",{class:"badge bx-work",text:"Шаги в плане: "+n.plan})));
+  const s4=el("div",{class:"steps4"}); for(let i=0;i<4;i++){ s4.append(el("div",{class: i<=n.auto[0]? "now" : (i<=n.auto[1]? "goal":"")})); }
+  p.append(el("div",{class:"auto"}, el("div",{class:"al",text:"Автоматизация"}), s4, el("div",{class:"ad",text:"Сейчас: "+AUTO[n.auto[0]]+" → цель: "+AUTO[n.auto[1]]})));
+  const sec=(cls,title,items)=>{ if(!items||!items.length||(items.length===1&&items[0]==="—")) return null; return el("div",{class:"blk"}, el("h4",{class:cls,text:title}), cls==="h-steps"? (()=>{const o=el("ol",{}); items.forEach(x=>o.append(el("li",{text:x}))); return o;})() : list(items)); };
+  [sec("h-have","✅ Что уже есть",n.have), sec("h-miss","❌ Чего не хватает",n.miss), sec("h-who","🤖 Кто делает",n.who), sec("h-who","✨ Создать",n.create), sec("h-tz","📄 Какие ТЗ нужны",n.tz), sec("h-steps","👣 Шаги по порядку",n.steps)].forEach(x=>{ if(x) p.append(x); });
+  p.append(el("div",{class:"plan",text:"Подробно каждый шаг (кто, вход, результат, после чего) — в мастер-плане, ID "+n.plan+"."}));
+  $("scrim").hidden=false; p.hidden=false; close.focus();
+  document.querySelectorAll(".node[aria-current]").forEach(x=>x.removeAttribute("aria-current"));
+  if (btn) btn.setAttribute("aria-current","true");
+  p._return=btn;
+}
+function closePanel(){ $("panel").hidden=true; $("scrim").hidden=true; const r=$("panel")._return; current=null; document.querySelectorAll(".node[aria-current]").forEach(x=>x.removeAttribute("aria-current")); if(r) r.focus(); }
+$("scrim").addEventListener("click",closePanel);
+document.addEventListener("keydown",e=>{ if(e.key==="Escape" && !$("panel").hidden) closePanel(); });
+
+function renderFilters(){
+  const f=$("filters"); f.textContent="";
+  [["all","Всё"],["no","Только «нет, создать»"],["work","В работе"],["part","Частично"],["ok","Есть"],["pause","Пауза"]].forEach(([k,l])=>{
+    const b=el("button",{class:"chipf",type:"button","aria-pressed":String(filter===k),text:l});
+    b.addEventListener("click",()=>{ filter=k; renderFilters(); renderMap(); }); f.append(b);
+  });
+}
+
+function renderFlows(){
+  const box=$("flows"); box.textContent="";
+  FLOWS.forEach(f=>{
+    const ch=el("div",{class:"chain"});
+    f.c.forEach((a,i)=>{
+      if(i>0){ const br=f.broken.includes(i); ch.append(el("span",{class:"arrow"+(br?" broken":"")}, el("b",{text: br?"⇢":"→"}), document.createTextNode(f.c[i-1][1]))); }
+      ch.append(el("span",{class:"actor "+a[2]}, document.createTextNode(a[0])));
+    });
+    box.append(el("div",{class:"flow"}, el("div",{class:"fh"}, el("div",{class:"ft",text:f.t})), el("div",{class:"fn",text:f.n}), ch));
+  });
+}
+function renderQs(){
+  const box=$("qs"); box.textContent="";
+  QS.forEach((q,i)=>box.append(el("div",{class:"q"}, el("div",{class:"qt",text:(i+1)+". "+q.t}), el("div",{class:"qv",text:q.v}))));
+}
+
+const tabs=[["t-map","v-map"],["t-flow","v-flow"],["t-q","v-q"]];
+tabs.forEach(([t,v])=>$(t).addEventListener("click",()=>{
+  tabs.forEach(([t2,v2])=>{ $(t2).setAttribute("aria-selected",String(t2===t)); $(v2).hidden = t2!==t; if(t2===t) $(v2).style.display="grid"; });
+  if (t==="t-map") requestAnimationFrame(drawLinks);
+}));
+
+renderFilters(); renderMap(); renderFlows(); renderQs();
+window.addEventListener("resize",()=>requestAnimationFrame(drawLinks));
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(()=>requestAnimationFrame(drawLinks));
+</script>
