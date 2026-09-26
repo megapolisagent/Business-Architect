@@ -1,0 +1,385 @@
+<title>ОС агентства Мегаполис</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#F7F2F5; --surface:#FFFFFF; --surface2:#FBF7FA; --ink:#2B2130; --muted:#6E6275; --line:#E9DEE6;
+  --accent:#8A3D6E; --accent-soft:#F5E4EF; --rose:#C45C7C; --rose-soft:#FBE7ED; --lav:#6F5BB0; --lav-soft:#ECE8F8;
+  --ok:#3F8566; --ok-soft:#E1F1E8; --part:#B07A18; --part-soft:#FAEFD8; --no:#C0384F; --no-soft:#FBE3E7;
+  --display:"Cormorant Garamond",Georgia,serif; --body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --shadow:0 1px 2px rgba(80,40,70,.06),0 6px 20px rgba(80,40,70,.07);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){color-scheme:dark;
+    --bg:#1A1420; --surface:#241C2B; --surface2:#2B2233; --ink:#F1E9F0; --muted:#B5A7B8; --line:#3A2F42;
+    --accent:#E08BBE; --accent-soft:#3A2233; --rose:#F092AC; --rose-soft:#3E2230; --lav:#B3A4EE; --lav-soft:#2E2842;
+    --ok:#77C9A2; --ok-soft:#1E3A2E; --part:#E6B45A; --part-soft:#3A2E17; --no:#F28195; --no-soft:#40202A;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);}
+}
+:root[data-theme="dark"]{color-scheme:dark;
+  --bg:#1A1420; --surface:#241C2B; --surface2:#2B2233; --ink:#F1E9F0; --muted:#B5A7B8; --line:#3A2F42;
+  --accent:#E08BBE; --accent-soft:#3A2233; --rose:#F092AC; --rose-soft:#3E2230; --lav:#B3A4EE; --lav-soft:#2E2842;
+  --ok:#77C9A2; --ok-soft:#1E3A2E; --part:#E6B45A; --part-soft:#3A2E17; --no:#F28195; --no-soft:#40202A;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;padding-inline:16px;padding-block:20px 56px}
+.wrap{max-width:1180px;margin:0 auto;display:grid;gap:18px}
+header{display:grid;gap:4px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(30px,4.6vw,46px);line-height:1.05;margin:0}
+.sub{color:var(--muted);margin:0;max-width:75ch}
+nav.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5;padding-top:6px}
+.tab{flex:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:7px 14px;font:inherit;font-weight:600;font-size:13.5px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tab:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--rose);outline-offset:2px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:16px 18px}
+h2.sec{font-family:var(--display);font-size:28px;font-weight:700;margin:6px 0 0;line-height:1.1}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.tile{display:grid;gap:4px;align-content:start}
+.tile .n{font-family:var(--display);font-size:34px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.tile .l{font-size:13px;color:var(--muted)}
+.tile .s{font-size:11.5px;color:var(--muted);font-style:italic}
+.grid12{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.dir{display:grid;gap:6px;border-left:5px solid var(--line);text-align:left;font:inherit;color:inherit;cursor:pointer}
+.dir.no{border-left-color:var(--no)} .dir.part{border-left-color:var(--part)} .dir.ok{border-left-color:var(--ok)}
+.dir .t{font-weight:700;font-size:15px;display:flex;gap:8px;align-items:baseline}
+.dir .t span{font-family:var(--display);font-size:22px;color:var(--accent)}
+.dir .r{font-size:13px;color:var(--muted)}
+.dir .f{font-size:13px}
+.kv{font-size:12.5px;color:var(--muted)}
+.kv b{color:var(--ink);font-weight:600}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13.5px}
+.flow .x{background:var(--surface2);border:1px solid var(--line);border-radius:10px;padding:5px 10px;font-weight:600}
+.flow .a{color:var(--rose);font-weight:700}
+.two{display:grid;grid-template-columns:1.2fr 1fr;gap:14px}
+@media (max-width:860px){.two{grid-template-columns:1fr}}
+.pill{border:0;border-radius:999px;padding:4px 11px;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap}
+.pill[data-s="todo"]{background:var(--line);color:var(--muted)}
+.pill[data-s="doing"]{background:var(--part-soft);color:var(--part)}
+.pill[data-s="done"]{background:var(--ok-soft);color:var(--ok)}
+.pill[data-s="blocked"]{background:var(--no-soft);color:var(--no)}
+.pill:disabled{cursor:default}
+.stage{display:grid;gap:10px}
+.stage h3{margin:0;font-family:var(--display);font-size:24px;line-height:1.1;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline}
+.stage h3 small{font-family:var(--body);font-size:13px;color:var(--muted);font-weight:500}
+.step{display:grid;grid-template-columns:52px 1fr auto;gap:10px;align-items:center;padding:9px 0;border-top:1px solid var(--line)}
+.step:first-of-type{border-top:0}
+.step .id{font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
+.step .w{min-width:0}
+.step .m{font-size:12.5px;color:var(--muted)}
+.gate{background:var(--lav-soft);color:var(--ink);border-radius:10px;padding:8px 12px;font-size:13.5px}
+.dec{display:grid;gap:8px;border-left:5px solid var(--line)}
+.dec.red{border-left-color:var(--no)} .dec.green{border-left-color:var(--ok)}
+.dec .h{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap;align-items:baseline}
+.dec .h b{font-size:15px}
+.dec .id{font-weight:800;color:var(--accent);margin-right:6px}
+.dec .d{font-size:13.5px}
+.dec .row{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.opt{border:1px solid var(--line);background:var(--surface2);color:var(--ink);border-radius:999px;padding:5px 12px;font:inherit;font-size:13px;cursor:pointer}
+.opt[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .opt[aria-pressed="true"]{color:#1A1420}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .opt[aria-pressed="true"]{color:#1A1420}}
+input.note{flex:1 1 220px;min-width:0;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 10px;font:inherit;font-size:13.5px}
+.chk{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:12px 0;border-top:1px solid var(--line)}
+.chk:first-of-type{border-top:0}
+.chk input{width:22px;height:22px;accent-color:var(--accent);margin-top:2px}
+.chk .t{font-weight:700}
+.chk .m{font-size:13.5px;color:var(--muted)}
+.doc{overflow-x:auto}
+.doc h1{font-family:var(--display);font-size:32px;line-height:1.1;margin:0 0 8px}
+.doc h2{font-family:var(--display);font-size:25px;line-height:1.15;margin:26px 0 8px;scroll-margin-top:70px}
+.doc h3{font-size:16px;margin:18px 0 6px}
+.doc table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0 14px;display:block;overflow-x:auto}
+.doc th,.doc td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top;min-width:90px}
+.doc th{background:var(--accent-soft);font-weight:700}
+.doc tr:nth-child(even) td{background:var(--surface2)}
+.doc blockquote{margin:8px 0;padding:8px 14px;border-left:4px solid var(--rose);background:var(--rose-soft);border-radius:0 10px 10px 0;color:var(--ink);font-size:13.5px}
+.doc code{background:var(--surface2);border:1px solid var(--line);border-radius:4px;padding:0 4px;font-size:.92em}
+.doc pre{overflow-x:auto}
+.chart{width:100%;height:auto;display:block}
+.chart text{fill:var(--muted);font-size:11px;font-family:var(--body)}
+.chart .zero{stroke:var(--ink);stroke-width:1}
+.chart .grid{stroke:var(--line);stroke-width:1}
+.chart .pos{fill:var(--ok)} .chart .neg{fill:var(--no)} .chart .in{fill:var(--lav)}
+.note-s{font-size:12.5px;color:var(--muted)}
+.tgrp{display:grid;gap:4px}
+.trow{display:grid;grid-template-columns:62px 1fr auto;gap:10px;align-items:center;padding:7px 0;border-top:1px solid var(--line);font-size:14px}
+.trow .i{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+select{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 10px;font:inherit}
+.sync{font-size:12.5px;color:var(--muted)}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Операционная система · v1.0 · 26.09.2026</div>
+    <h1>Агентство «Мегаполис»</h1>
+    <p class="sub">Как агентство должно работать и что уже работает на деле. Денежная цель №1 — первая сделка. Документ или агент ещё не значит, что функция закрыта.</p>
+    <div class="sync" id="sync">Статусы: подключаются…</div>
+  </header>
+  <nav class="tabs" id="tabs" role="tablist" aria-label="Разделы"></nav>
+
+  <section id="p-home" class="page" style="display:grid;gap:16px">
+    <div class="tiles" id="tiles"></div>
+    <div class="two">
+      <div class="card" style="display:grid;gap:10px">
+        <h2 class="sec">Что делаем сейчас</h2>
+        <div id="nowstage"></div>
+      </div>
+      <div class="card" style="display:grid;gap:10px">
+        <h2 class="sec">Решения за вами</h2>
+        <div id="homedec" style="display:grid;gap:8px"></div>
+      </div>
+    </div>
+    <div class="card" style="display:grid;gap:10px">
+      <h2 class="sec">12 направлений: как должно быть и что есть</h2>
+      <div class="note-s">Цвет полосы — состояние сейчас: красный — нет, жёлтый — частично. Нажмите на карточку, чтобы открыть полное описание.</div>
+      <div class="grid12" id="dirs"></div>
+    </div>
+    <div class="card" style="display:grid;gap:12px">
+      <h2 class="sec">Главные связи</h2>
+      <div class="flow" id="flow1"></div>
+      <div class="flow" id="flow2"></div>
+      <div class="flow" id="flow3"></div>
+      <div class="doc"><pre class="mermaid">__MERMAID__</pre></div>
+    </div>
+    <div class="card" style="display:grid;gap:8px">
+      <h2 class="sec">Порядок включения ролей</h2>
+      <div class="flow" id="rolesflow"></div>
+    </div>
+  </section>
+
+  <div id="pages"></div>
+</div>
+
+<script>
+const D = __DATA__;
+const $ = id => document.getElementById(id);
+function el(tag, attrs, ...kids){ const e=document.createElement(tag); for(const k in (attrs||{})){ if(k==="class") e.className=attrs[k]; else if(k==="text") e.textContent=attrs[k]; else e.setAttribute(k,attrs[k]); } for(const c of kids) if(c!=null) e.append(c); return e; }
+const ORDER=["todo","doing","done","blocked"], LBL={todo:"не начато",doing:"в работе",done:"сделано",blocked:"блок"};
+const key = id => String(id).replace(/Е/g,"E").replace(/Д/g,"D").replace(/Р/g,"R").replace(/[^A-Za-z0-9]/g,"_");
+const st = {plan:{}, dec:{}, monday:{}, status:{}};
+let db=null, canWrite=false;
+
+/* ---------- tabs & pages ---------- */
+const pagesBox=$("pages");
+D.tabs.forEach(([k,t])=>{
+  const b=el("button",{class:"tab",role:"tab",type:"button",id:"t-"+k,"aria-selected":String(k==="home"),text:t});
+  b.addEventListener("click",()=>show(k)); $("tabs").append(b);
+  if(k==="home") return;
+  const sec=el("section",{class:"page",id:"p-"+k,hidden:""});
+  pagesBox.append(sec);
+});
+function show(k, anchor){
+  D.tabs.forEach(([k2])=>{ $("t-"+k2).setAttribute("aria-selected",String(k2===k)); $("p-"+k2).hidden = k2!==k; });
+  if(k==="home") $("p-home").style.display="grid";
+  if(anchor){ const a=document.getElementById(anchor); if(a) a.scrollIntoView({behavior:"smooth",block:"start"}); }
+  else window.scrollTo({top:0});
+}
+function docCard(html){ const c=el("div",{class:"card doc"}); c.innerHTML=html; return c; }
+
+/* ---------- home ---------- */
+function rub(n){ return (n<0?"−":"")+Math.abs(n).toLocaleString("ru-RU")+" ₽"; }
+function renderHome(){
+  const t=$("tiles"); t.textContent="";
+  const m=D.money||{};
+  const minEnd = m.end ? Math.min(...m.end) : null;
+  const tile=(n,l,s)=>el("div",{class:"card tile"},el("div",{class:"n",text:n}),el("div",{class:"l",text:l}),s?el("div",{class:"s",text:s}):null);
+  const planAll=D.stages.flatMap(s=>s.steps), planDone=planAll.filter(x=>st.plan[x.id]==="done").length;
+  const red=D.decisions.filter(d=>d.type.includes("🔴")), redDone=red.filter(d=>st.dec[d.id]&&st.dec[d.id].state&&st.dec[d.id].state!=="open").length;
+  t.append(
+    tile("≈ 1 млн ₽","комиссия с одной сделки","оценка Марии, бриф 24.09.2026"),
+    tile(minEnd!=null? rub(minEnd):"—","минимум остатка до первой выплаты","сценарий модели I, базовый; решение J-17"),
+    tile(m.cpq_max? "≤ "+rub(m.cpq_max):"—","предел цены квалифицированного лида","чтобы маркетинг ≤ 20% комиссии; сценарий"),
+    tile(`${planDone}/${planAll.length}`,"шагов плана 90 дней сделано"),
+    tile(`${redDone}/${red.length}`,"ваших решений принято")
+  );
+  // now stage
+  const ns=$("nowstage"); ns.textContent="";
+  const cur = D.stages.filter(s=>!s.ai).find(s=>s.steps.some(x=>st.plan[x.id]!=="done")) || D.stages[0];
+  ns.append(el("div",{class:"kv"},el("b",{text:cur.title})));
+  cur.steps.forEach(x=>ns.append(stepRow(x)));
+  cur.gates.forEach(g=>ns.append(el("div",{class:"gate",text:g})));
+  // decisions
+  const hd=$("homedec"); hd.textContent="";
+  red.forEach(d=>{
+    const s=(st.dec[d.id]||{}).state||"open";
+    const lab={open:"открыт",default:"принято по умолчанию",own:"своё решение"}[s];
+    const b=el("button",{class:"card dec "+(s==="open"?"red":"green"),type:"button",style:"text-align:left;font:inherit;color:inherit;cursor:pointer;padding:10px 12px"},
+      el("div",{class:"h"},el("b",{},el("span",{class:"id",text:d.id}),document.createTextNode(d.q)),el("span",{class:"kv",text:lab})));
+    b.addEventListener("click",()=>show("decisions","dec-"+d.id)); hd.append(b);
+  });
+  // directions
+  const dd=$("dirs"); dd.textContent="";
+  D.directions.forEach(x=>{
+    const cls = x.state.includes("❌")?"no":(x.state.includes("🟡")?"part":"ok");
+    const b=el("button",{class:"card dir "+cls,type:"button"},
+      el("div",{class:"t"},el("span",{text:x.n}),document.createTextNode(x.name)),
+      el("div",{class:"r",text:x.result}),
+      el("div",{class:"kv"},el("b",{text:"Отвечает: "}),document.createTextNode(x.owner+" · "),el("b",{text:"Делает: "}),document.createTextNode(x.now)),
+      el("div",{class:"kv",text:"Сейчас: "+x.state}),
+      el("div",{class:"f"},el("b",{text:"Первое действие: "}),document.createTextNode(x.first)));
+    b.addEventListener("click",()=>{ const h=[...document.querySelectorAll("#p-model h2")].find(h=>h.textContent.trim().startsWith(x.n+".")); show("model", h? h.id : null); });
+    dd.append(b);
+  });
+  const flow=(id,items)=>{ const f=$(id); f.textContent=""; items.forEach((it,i)=>{ if(i) f.append(el("span",{class:"a",text:"→"})); f.append(el("span",{class:"x",text:it})); }); };
+  flow("flow1",["Пост / объявление / рекомендация","Обращение","CRM","Первый ответ ≤ 15 мин","Диагностика","Бриф","Фиксация","Подбор и КП","Показы","Бронь","ДДУ","Комиссия","Рекомендация"]);
+  flow("flow2",["Лот застройщика группы 1","Проверка фактов","Упаковка (Рынок)","Юрист","«Да» Марии","Авито","Лид","Продажи"]);
+  flow("flow3",["Решение о тесте","Лимит и стоп","Запуск","Цена квал. лида","Обзор по понедельникам","Масштаб или стоп"]);
+  flow("rolesflow",["Сейчас: Мария + CMO + Рынок + Юрист + архитектор + партнёры","Т1: ассистент по лидам","Т2: контент-менеджер","Т3: брокер-2"]);
+}
+
+/* ---------- plan ---------- */
+function stepRow(x){
+  const s=st.plan[x.id]||"todo";
+  const p=el("button",{class:"pill",type:"button","data-s":s,text:LBL[s],"aria-label":`Шаг ${x.id}: ${LBL[s]}. Сменить статус`});
+  if(!db||!canWrite) p.disabled=true;
+  p.addEventListener("click",()=>cycle("plan",x.id));
+  return el("div",{class:"step"},el("span",{class:"id",text:x.id}),
+    el("div",{class:"w"},el("div",{text:x.what}),el("div",{class:"m",text:"Делает: "+x.who+(x.dep&&x.dep!=="—"?" · после: "+x.dep:"")})),p);
+}
+function renderPlan(){
+  const p=$("p-plan"); p.textContent=""; p.style.display="grid"; p.style.gap="14px";
+  D.stages.forEach(s=>{
+    const done=s.steps.filter(x=>st.plan[x.id]==="done").length;
+    const c=el("div",{class:"card stage"},el("h3",{},document.createTextNode(s.title),el("small",{text:`${done}/${s.steps.length} сделано`})));
+    s.steps.forEach(x=>c.append(stepRow(x)));
+    s.gates.forEach(g=>c.append(el("div",{class:"gate",text:g})));
+    p.append(c);
+  });
+  const full=el("details",{class:"card"},el("summary",{text:"Полный текст плана (D)"}));
+  full.append(docCard(D.pages.plan)); p.append(full);
+}
+
+/* ---------- decisions ---------- */
+function renderDecisions(){
+  const p=$("p-decisions"); p.textContent=""; p.style.display="grid"; p.style.gap="12px";
+  p.append(el("div",{class:"note-s",text:"🔴 — нужно ваше утверждение. 🟢 — система работает по умолчанию, вы можете изменить. Выбор и комментарий сохраняются."}));
+  D.decisions.forEach(d=>{
+    const cur=st.dec[d.id]||{}; const s=cur.state||"open";
+    const c=el("div",{class:"card dec "+(d.type.includes("🔴")?(s==="open"?"red":"green"):"green"),id:"dec-"+d.id},
+      el("div",{class:"h"},el("b",{},el("span",{class:"id",text:d.id}),document.createTextNode(d.q)),el("span",{class:"kv",text:d.type+" · блокирует: "+d.blocks})),
+      el("div",{class:"d"},el("b",{text:"По умолчанию: "}),document.createTextNode(d.default)));
+    const row=el("div",{class:"row"});
+    [["open","Открыт"],["default","Принять по умолчанию"],["own","Своё решение"]].forEach(([k,l])=>{
+      const b=el("button",{class:"opt",type:"button","aria-pressed":String(s===k),text:l});
+      if(!db||!canWrite) b.disabled=true;
+      b.addEventListener("click",()=>saveDec(d.id,{state:k,note:(st.dec[d.id]||{}).note||""}));
+      row.append(b);
+    });
+    const inp=el("input",{class:"note",type:"text",id:"note-"+d.id,placeholder:"Ваш комментарий или решение",value:cur.note||""});
+    if(!db||!canWrite) inp.disabled=true;
+    inp.addEventListener("change",()=>saveDec(d.id,{state:(st.dec[d.id]||{}).state||"own",note:inp.value.trim()}));
+    row.append(inp); c.append(row); p.append(c);
+  });
+  const full=el("details",{class:"card"},el("summary",{text:"Полный реестр (J): известно, неизвестно, журнал"}));
+  full.append(docCard(D.pages.decisions)); p.append(full);
+}
+
+/* ---------- monday ---------- */
+function renderMonday(){
+  const p=$("p-monday"); p.textContent=""; p.style.display="grid"; p.style.gap="12px";
+  const c=el("div",{class:"card"},el("h2",{class:"sec",text:"С чего начать в понедельник"}),el("div",{class:"note-s",text:"Пять действий, около 3 часов. Отметки сохраняются."}));
+  D.monday.forEach(x=>{
+    const cb=el("input",{type:"checkbox",id:"mon-"+x.n,"aria-label":x.what});
+    cb.checked=!!st.monday[x.n]; if(!db||!canWrite) cb.disabled=true;
+    cb.addEventListener("change",()=>saveMonday(x.n,cb.checked));
+    c.append(el("div",{class:"chk"},cb,el("label",{for:"mon-"+x.n},el("div",{class:"t",text:x.n+". "+x.what}),el("div",{class:"m",text:x.how}),el("div",{class:"m",text:"⏱ "+x.time+" · готово, когда: "+x.done}))));
+  });
+  p.append(c);
+}
+
+/* ---------- money ---------- */
+function renderMoney(){
+  const p=$("p-money"); p.textContent=""; p.style.display="grid"; p.style.gap="14px";
+  const m=D.money;
+  if(m && m.end){
+    const W=720,H=260,pad=44, n=12, vals=m.end, ins=m.inflow;
+    const max=Math.max(...vals,...ins,1), min=Math.min(...vals,0);
+    const y=v=> pad/2 + (max-v)/(max-min)*(H-pad);
+    const bw=(W-pad)/n;
+    const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");
+    svg.setAttribute("viewBox",`0 0 ${W} ${H}`); svg.setAttribute("class","chart"); svg.setAttribute("role","img");
+    svg.setAttribute("aria-label","Остаток денег на конец месяца и поступления комиссий, 12 месяцев, базовый сценарий");
+    const add=(tag,a)=>{const e=document.createElementNS("http://www.w3.org/2000/svg",tag); for(const k in a) e.setAttribute(k,a[k]); svg.append(e); return e;};
+    [max,0,min].forEach(v=>{ add("line",{x1:pad,x2:W,y1:y(v),y2:y(v),class:v===0?"zero":"grid"}); const t=add("text",{x:2,y:y(v)+4}); t.textContent=Math.round(v/1000)+"к"; });
+    vals.forEach((v,i)=>{
+      const x=pad+i*bw+bw*0.15, w=bw*0.34;
+      add("rect",{x, y:Math.min(y(v),y(0)), width:w, height:Math.max(1,Math.abs(y(v)-y(0))), class:v<0?"neg":"pos"});
+      if(ins[i]>0) add("rect",{x:x+w+2, y:y(ins[i]), width:w, height:Math.max(1,y(0)-y(ins[i])), class:"in"});
+      const t=add("text",{x:pad+i*bw+bw/2-8,y:H-4}); t.textContent="М"+(i+1);
+    });
+    const c=el("div",{class:"card",style:"display:grid;gap:8px"},el("h2",{class:"sec",text:"Деньги по месяцам (сценарий)"}),
+      el("div",{class:"note-s",text:"Зелёный/красный — остаток на конец месяца, фиолетовый — поступления комиссий. Базовый сценарий модели I; все вводные — допущения, пока не заменены фактами."}), svg,
+      el("div",{class:"kv"},el("b",{text:"Сделок за год по сценариям: "}),document.createTextNode(`пессимистичный ${m.deals_year[0]} · базовый ${m.deals_year[1]} · оптимистичный ${m.deals_year[2]}`)),
+      el("div",{class:"kv"},el("b",{text:"Остаётся с одной сделки до маркетинга: "}),document.createTextNode(rub(m.per_deal)+" (допущения: налог 6%, юрист 30 тыс. ₽)")),
+      el("div",{class:"kv"},el("b",{text:"Остаток впервые уходит в минус: "}),document.createTextNode(m.gap_month? "в месяце "+m.gap_month : "не уходит")));
+    p.append(c);
+  }
+  p.append(docCard(D.pages.money));
+  p.append(el("div",{class:"note-s",text:"Полная модель с формулами — OS/I_Финансовая_модель.xlsx (вводные, экономика сделки, сценарии, движение денег, каналы, план-факт, что заменить)."}));
+}
+
+/* ---------- background tasks ---------- */
+function renderTasks(){
+  const p=$("p-tasks"); p.textContent=""; p.style.display="grid"; p.style.gap="12px";
+  p.append(el("div",{class:"note-s",text:"Фон: мастер-план 24.09 (224 микрошага по блокам брифа). Порядок работы теперь задаёт план 90 дней; этот список — справочник микрошагов. Статусы сохранены."}));
+  const sel=el("select",{id:"tblock","aria-label":"Блок"});
+  const blocks=[...new Set(D.tasks.map(t=>t.block))];
+  ["Все блоки",...blocks].forEach(b=>sel.append(el("option",{value:b,text:b})));
+  const box=el("div",{class:"card tgrp"});
+  const draw=()=>{ box.textContent=""; D.tasks.filter(t=>sel.value==="Все блоки"||t.block===sel.value).forEach(t=>{
+    const s=st.status[t.id]||(t.done?"done":"todo");
+    const pl=el("button",{class:"pill",type:"button","data-s":s,text:LBL[s]}); if(!db||!canWrite) pl.disabled=true;
+    pl.addEventListener("click",()=>cycle("status",t.id));
+    box.append(el("div",{class:"trow"},el("span",{class:"i",text:t.id}),el("span",{text:t.what}),pl)); }); };
+  sel.addEventListener("change",draw); draw();
+  p.append(sel,box);
+}
+
+/* ---------- static pages ---------- */
+function renderStatic(){
+  ["model","strategy","marketing","funnel","roles","check","map"].forEach(k=>{ const p=$("p-"+k); p.textContent=""; p.append(docCard(D.pages[k])); });
+}
+
+/* ---------- storage ---------- */
+async function cycle(coll,id){
+  const cur=st[coll][id]||(coll==="status"&&(D.tasks.find(t=>t.id===id)||{}).done?"done":"todo");
+  const next=ORDER[(ORDER.indexOf(cur)+1)%ORDER.length];
+  st[coll][id]=next; renderDynamic();
+  try{ await db.doc(coll+"/"+key(id)).set({id, s:next, at:new Date().toISOString()}); }
+  catch(e){ $("sync").textContent="Не удалось сохранить: "+(e&&e.message||"ошибка")+". Обновите страницу."; }
+}
+async function saveDec(id,val){
+  st.dec[id]=val; renderDynamic();
+  try{ await db.doc("dec/"+key(id)).set({id, state:val.state, note:val.note, at:new Date().toISOString()}); }
+  catch(e){ $("sync").textContent="Не удалось сохранить решение. Обновите страницу."; }
+}
+async function saveMonday(n,v){
+  st.monday[n]=v; renderHome();
+  try{ await db.doc("monday/m"+key(n)).set({n, done:v, at:new Date().toISOString()}); }
+  catch(e){ $("sync").textContent="Не удалось сохранить отметку. Обновите страницу."; }
+}
+function renderDynamic(){
+  const active=document.activeElement && document.activeElement.id;
+  renderHome(); renderPlan(); renderDecisions(); renderMonday(); renderTasks();
+  if(active && $(active)) $(active).focus();
+  D.tabs.forEach(([k])=>{ if($("t-"+k).getAttribute("aria-selected")!=="true") $("p-"+k).hidden=true; });
+}
+
+renderStatic(); renderMoney(); renderDynamic();
+
+(async()=>{
+  const sync=$("sync");
+  try{ db = window.claude && window.claude.use ? await window.claude.use("db") : null; }catch(e){ db=null; }
+  if(!db){ sync.textContent="Статусы сохраняются только на claude.ai. Здесь — просмотр."; return; }
+  try{ const u=await window.claude.use("user"); const c=u? await u.can("data.write"):null; canWrite = c!==false; }catch(e){ canWrite=true; }
+  let loaded=0;
+  const sub=(coll,fn)=>db.collection(coll).onSnapshot(snap=>{ snap.docs.forEach(d=>fn(d.data()||{})); loaded++; sync.textContent= canWrite? "Статусы и решения сохраняются и видны вам на любом устройстве." : "Режим просмотра: изменения сохраняет только владелица."; renderDynamic(); }, ()=>{ sync.textContent="Связь с хранилищем потеряна. Обновите страницу."; });
+  sub("plan",v=>{ if(v.id) st.plan[v.id]=v.s; });
+  sub("dec",v=>{ if(v.id) st.dec[v.id]={state:v.state,note:v.note}; });
+  sub("monday",v=>{ if(v.n) st.monday[v.n]=!!v.done; });
+  sub("status",v=>{ if(v.id) st.status[v.id]=v.s; });
+})();
+</script>
